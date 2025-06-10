@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system with purple palette */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 42 87% 55%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 263 70% 50%;
+
+    --radius: 0.5rem;
+
+    /* Purple gradient palette */
+    --gradient-primary: linear-gradient(135deg, #10002B 0%, #240046 25%, #3C096C 50%, #5A189A 75%, #7B2CBF 100%);
+    --gradient-secondary: linear-gradient(135deg, #7B2CBF 0%, #9D4EDD 25%, #C77DFF 50%, #E0AAFF 100%);
+    --gradient-accent: linear-gradient(135deg, #240046 0%, #3C096C 50%, #7B2CBF 100%);
+    --gradient-light: linear-gradient(135deg, #C77DFF 0%, #E0AAFF 50%, #F8F4FF 100%);
+
+    /* Custom purple colors */
+    --purple-900: #10002B;
+    --purple-800: #240046;
+    --purple-700: #3C096C;
+    --purple-600: #5A189A;
+    --purple-500: #7B2CBF;
+    --purple-400: #9D4EDD;
+    --purple-300: #C77DFF;
+    --purple-200: #E0AAFF;
+    --purple-100: #F8F4FF;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 42 87% 55%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-primary);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .gradient-light {
+    background: var(--gradient-light);
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  .glass-card-dark {
+    @apply backdrop-blur-xl bg-black/20 border border-white/10 shadow-2xl;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .purple-gradient {
+    background: linear-gradient(135deg, #7B2CBF 0%, #9D4EDD 50%, #C77DFF 100%);
+  }
+
+  .purple-gradient-dark {
+    background: linear-gradient(135deg, #240046 0%, #3C096C 50%, #5A189A 100%);
+  }
+
+  .logo-glow {
+    filter: drop-shadow(0 0 20px rgba(123, 44, 191, 0.5));
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Responsive text sizes */
+  @media (max-width: 768px) {
+    .text-4xl { font-size: 2rem; }
+    .text-6xl { font-size: 2.5rem; }
+    .glass-card { padding: 1rem; }
+  }
+
+  /* Better contrast for accessibility */
+  .text-white\/90 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text-white\/80 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .text-white\/70 {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .text-white\/60 {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Professional button styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-purple-400 to-purple-300 hover:from-purple-500 hover:to-purple-400 text-purple-900 font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply border-2 border-purple-400 text-purple-300 hover:bg-purple-400 hover:text-purple-900 font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  /* Professional input styles */
+  .input-primary {
+    @apply bg-white/10 border-2 border-white/20 text-white placeholder:text-white/60 rounded-xl px-4 py-3 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 transition-all duration-300;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transform hover:scale-105 hover:shadow-2xl transition-all duration-300 hover:bg-white/15;
+  }
+
+  /* Logo container */
+  .logo-container {
+    @apply relative inline-block;
+  }
+
+  .logo-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #7B2CBF, #9D4EDD, #C77DFF, #E0AAFF);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: rotate 10s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Better spacing for form icons */
+  .form-icon-spacing {
+    padding-left: 3rem;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .glass-card {
+      margin: 0.5rem;
+      padding: 1.5rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+    }
+    
+    .input-primary {
+      padding: 0.875rem 1rem;
+      padding-left: 3rem;
+      font-size: 1rem;
+    }
+  }
+
+  /* QR Scanner improvements */
+  .qr-scanner-container {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+    border: 2px solid rgba(123, 44, 191, 0.5);
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .qr-scanner-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Ensure QR scanner video fills container properly */
+  #qr-reader video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0.75rem;
+  }
+
+  #qr-reader {
+    background: #000;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  /* Hide QR scanner default UI elements */
+  #qr-reader__dashboard_section {
+    display: none !important;
+  }
+
+  #qr-reader__header_message {
+    display: none !important;
+  }
+
+  #qr-reader__camera_selection {
+    display: none !important;
+  }
+
+  #qr-reader__scan_region {
+    border: none !important;
+  }
+}
