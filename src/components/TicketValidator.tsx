@@ -258,7 +258,7 @@ const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: Ti
           <div className="flex justify-center">
             <Button
               variant="outline"
-              className="bg-gradient-to-r from-purple-500/20 to-purple-400/20 border-2 border-purple-400 text-purple-200 hover:bg-purple-400 hover:text-purple-900 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base sm:text-lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white hover:from-blue-700 hover:to-purple-700 hover:border-blue-300 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base sm:text-lg"
               onClick={() => setShowScanner(true)}
             >
               <Camera className="w-5 h-5 mr-3" />
