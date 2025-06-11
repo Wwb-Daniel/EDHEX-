@@ -18,13 +18,15 @@ interface TicketValidatorProps {
 const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: TicketValidatorProps) => {
   const [searchCode, setSearchCode] = useState("");
   const [validationResult, setValidationResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [showScanner, setShowScanner] = useState(false);
   const scannerRef = useRef<HTMLDivElement>(null);
   const html5QrRef = useRef<Html5Qrcode | null>(null);
 
   const validateTicket = async (codeArg?: string) => {
-    const codeToValidate = (codeArg ?? searchCode).trim();
+    const codeToValidate = (codeArg ?? searchCode).trim().toUpperCase();
+    
     if (!codeToValidate) {
       toast({
         title: "Error",
@@ -34,15 +36,20 @@ const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: Ti
       return;
     }
 
+    setLoading(true);
+    
     try {
+      console.log('Validating code:', codeToValidate);
+      
       // Buscar ticket en la base de datos
       const { data: ticket, error } = await supabase
         .from('tickets')
         .select('*')
-        .eq('code', codeToValidate.toUpperCase())
+        .eq('code', codeToValidate)
         .single();
 
       if (error || !ticket) {
+        console.log('Ticket not found:', error);
         setValidationResult({
           status: "invalid",
           message: "Código no encontrado",
@@ -130,6 +137,21 @@ const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: Ti
         description: "Error al validar la entrada",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !loading) {
+      e.preventDefault();
+      validateTicket();
+    }
+  };
+
+  const handleValidateClick = () => {
+    if (!loading) {
+      validateTicket();
     }
   };
 
@@ -142,7 +164,7 @@ const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: Ti
         { fps: 10, qrbox: { width: 250, height: 250 } },
         (decodedText) => {
           if (!isMounted) return;
-          setSearchCode(decodedText);
+          setSearchCode(decodedText.toUpperCase());
           setShowScanner(false);
           setTimeout(() => validateTicket(decodedText), 100);
         },
@@ -240,17 +262,19 @@ const TicketValidator = ({ validator, tickets, onTicketValidated, onLogout }: Ti
                   id="code"
                   value={searchCode}
                   onChange={(e) => setSearchCode(e.target.value.toUpperCase())}
+                  onKeyPress={handleKeyPress}
                   placeholder="Escanea el QR o ingresa el código"
                   className="bg-white/10 border-white/20 text-white placeholder:text-white/50 pl-12 text-base sm:text-lg h-12 sm:h-14 font-mono"
-                  onKeyPress={(e) => e.key === 'Enter' && validateTicket()}
+                  disabled={loading}
                 />
               </div>
               <Button
-                onClick={validateTicket}
-                className="bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white h-12 sm:h-14 px-6 sm:px-8 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                onClick={handleValidateClick}
+                disabled={loading || !searchCode.trim()}
+                className="bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white h-12 sm:h-14 px-6 sm:px-8 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 <Search className="w-5 h-5 mr-2" />
-                Validar
+                {loading ? "Validando..." : "Validar"}
               </Button>
             </div>
           </div>
