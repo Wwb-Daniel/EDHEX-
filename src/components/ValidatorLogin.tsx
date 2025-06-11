@@ -33,9 +33,19 @@ const ValidatorLogin = ({ onLogin }: ValidatorLoginProps) => {
         .select('*')
         .eq('code', validatorCode.toUpperCase())
         .eq('is_active', true)
-        .single();
+        .maybeSingle();
 
-      if (error || !validator) {
+      if (error) {
+        console.error('Supabase error:', error);
+        toast({
+          title: "Error",
+          description: "Error al verificar el validador",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (!validator) {
         toast({
           title: "Error",
           description: "Código de validador inválido o inactivo",
