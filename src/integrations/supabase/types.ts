@@ -14,16 +14,25 @@ export type Database = {
           created_at: string
           id: string
           name: string
+          password_hash: string
+          tickets_generated: number
+          max_tickets: number
         }
         Insert: {
           created_at?: string
           id?: string
           name: string
+          password_hash: string
+          tickets_generated?: number
+          max_tickets?: number
         }
         Update: {
           created_at?: string
           id?: string
           name?: string
+          password_hash?: string
+          tickets_generated?: number
+          max_tickets?: number
         }
         Relationships: []
       }
