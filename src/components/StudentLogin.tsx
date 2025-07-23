@@ -19,6 +19,16 @@ const StudentLogin = ({ onLogin }: StudentLoginProps) => {
   const { toast } = useToast();
 
   const handleRegister = async () => {
+    // Verificar si ya hay un usuario registrado en este dispositivo
+    if (localStorage.getItem("edhex_user_registered")) {
+      toast({
+        title: "Registro bloqueado",
+        description: "Ya se ha registrado un graduando en este dispositivo. Solo se permite un usuario por dispositivo.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!studentName || !password) {
       toast({
         title: "Error",
@@ -66,6 +76,9 @@ const StudentLogin = ({ onLogin }: StudentLoginProps) => {
         title: "¡Registro exitoso! 🎓",
         description: `Bienvenido ${studentName}. Puedes generar hasta 5 entradas.`,
       });
+
+      // Guardar en localStorage que ya se registró un usuario en este dispositivo
+      localStorage.setItem("edhex_user_registered", studentName);
 
       onLogin(data);
     } catch (error) {
